@@ -1,4 +1,4 @@
-import numpy as np
+﻿import numpy as np
 import matplotlib.pyplot as plt
 from tinytorch import Tensor, Conv2d, MaxPool2d, Linear, ReLU
 
@@ -66,10 +66,10 @@ def show_predictions(n=16, only_errors=False):
 
     if only_errors:
         idx = np.where(preds != y_test)[0]      # sadece hatalar
-        title = "Yanlis tahminler"
+        title = "Misclassified examples"
     else:
         idx = np.random.permutation(len(y_test))  # rastgele karisim
-        title = "Ornek tahminler"
+        title = "Sample predictions"
     idx = idx[:n]
 
     rows = int(np.ceil(n / 4))
@@ -77,7 +77,7 @@ def show_predictions(n=16, only_errors=False):
     for ax, i in zip(axes.flat, idx):
         ax.imshow(x_test[i, 0], cmap="gray")     # (1,28,28) -> (28,28)
         ok = preds[i] == y_test[i]
-        ax.set_title(f"tahmin: {preds[i]}  (gercek: {y_test[i]})",
+        ax.set_title(f"pred: {preds[i]}  (true: {y_test[i]})",
                      color="green" if ok else "red", fontsize=10)
         ax.axis("off")
     for ax in axes.flat[len(idx):]:
